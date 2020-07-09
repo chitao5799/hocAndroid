@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
     }
 
-   // @Override
+    @Override
     public void onClick(View view) {
         switch (view.getId())
         {
