@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:measureAllChildren="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--measureAllChildren="true" để cho nhiều view thì khi ẩn 1 view thì sẽ thấy các view sau nó    -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo" />
+<!-- khi khai báo nhiều view thì view khai báo trước nằm dưới view khai báo sau   -->
+    <TextView
+        android:textColor="#ff00"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lập trình android"
+        android:textSize="40sp" />
+</FrameLayout>
