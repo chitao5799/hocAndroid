@@ -4,24 +4,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 <!-- drawableLeft="@mipmap/ic_launcher" ||"@drawable/icons_user" có 1 cái icon bên trái của phần nhập text-->
+
     <EditText
-        android:drawableLeft="@drawable/icons_user"
-        android:textColorHint="#BC76B0"
-        android:textColor="#E85555"
-        android:textSize="25sp"
-        android:hint="nhập họ tên"
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="3dp"
+        android:drawableLeft="@drawable/icons_user"
         android:ems="10"
+        android:hint="nhập họ tên"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""
+        android:textColor="#E85555"
+        android:textColorHint="#BC76B0"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnClick"
@@ -29,7 +30,88 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtName"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="163dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="161dp"
         android:text="Submit" />
+
+    <TextView
+        android:id="@+id/txtRandom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnClick"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="194dp"
+        android:text="0"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnRandom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRandom"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="142dp"
+        android:text="Random"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRandom"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="54dp"
+        android:text="Random trong khoảng giá trị"
+        android:textSize="24sp" />
+
+<!--    android:inputType="number" là chỉ nhập số-->
+<!--    android:inputType="numberSigned" là chỉ nhập số có thể âm hoặc dương-->
+    <EditText
+        android:id="@+id/edtTextNum1"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
+        android:layout_toStartOf="@+id/edtTextNum2"
+        android:ems="10"
+        android:hint="min number"
+        android:inputType="numberSigned"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtTextNum2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="max number"
+        android:inputType="numberSigned"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnRandom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtTextNum2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="145dp"
+        android:text="Random now" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRandom2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="207dp"
+        android:textSize="30sp" />
 </RelativeLayout>

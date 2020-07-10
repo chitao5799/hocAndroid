@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RadioButtonVD">
+
+    <RadioGroup
+        android:id="@+id/radioGroupTime"
+        android:layout_width="317dp"
+        android:layout_height="211dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbtnSang"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:checked="false"
+            android:text="Sáng"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbtnTrua"
+            android:layout_width="151dp"
+            android:layout_height="55dp"
+            android:text="Trưa"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbtnChieu"
+            android:layout_width="148dp"
+            android:layout_height="52dp"
+            android:text="Chiều"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnXacNhan"
+        android:layout_width="267dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="72dp"
+        android:text="Chọn"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTime" />
+</androidx.constraintlayout.widget.ConstraintLayout>
