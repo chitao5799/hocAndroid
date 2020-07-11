@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RadioButtonVD">
+        <activity android:name=".SeekBarVD">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckBoxVD">
+        <activity android:name=".ProgressBarVD">
 
         </activity>
-        <activity android:name=".switchVD"></activity>
+        <activity android:name=".RadioButtonVD"></activity>
+        <activity android:name=".CheckBoxVD" />
+        <activity android:name=".switchVD" />
         <activity android:name=".ImageViewVD" />
         <activity android:name=".EditTextVD" />
         <activity android:name=".MainActivity" />
