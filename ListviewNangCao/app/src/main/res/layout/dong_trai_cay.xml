@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--đây là file layout: new >> Layout Resource File . Đây sẽ là 1 dòng của listview khi hiển thị-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:padding="10dp"
+        android:id="@+id/imgViewHinh"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+    <TextView
+        android:id="@+id/txtTen"
+        android:layout_marginTop="5dp"
+        android:textColor="#D84C4C"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imgViewHinh"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên" />
+    <TextView
+        android:id="@+id/txtMoTa"
+        android:layout_below="@+id/txtTen"
+        android:text="Mô tả"
+        android:layout_toRightOf="@+id/imgViewHinh"
+        android:textSize="22sp"
+        android:textColor="#939191"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

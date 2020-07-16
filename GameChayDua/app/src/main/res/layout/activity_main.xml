@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pexels"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBox
+        android:layout_alignParentBottom="true"
+        android:id="@+id/ckThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+    <CheckBox
+        android:layout_above="@+id/ckThree"
+        android:id="@+id/ckTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+    <CheckBox
+        android:id="@+id/ckOne"
+        android:layout_above="@+id/ckTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+    <SeekBar
+        android:progressDrawable="@android:color/transparent"
+        android:id="@+id/seekbarThree"
+        android:thumb="@drawable/animal3"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/ckThree"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content" />
+    <SeekBar
+        android:progressDrawable="@android:color/transparent"
+        android:id="@+id/seekbarTwo"
+        android:thumb="@drawable/animal2"
+        android:layout_above="@+id/seekbarThree"
+        android:layout_toRightOf="@+id/ckTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <SeekBar
+        android:progressDrawable="@android:color/transparent"
+        android:id="@+id/seekbarOne"
+        android:thumb="@drawable/animal_1"
+        android:layout_above="@+id/seekbarTwo"
+        android:layout_toRightOf="@+id/ckOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="195dp"
+        android:layout_height="115dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/txtScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#FD0505" />
+
+    <ImageView
+        android:id="@+id/btnPlay"
+        android:layout_width="64dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/play" />
+</RelativeLayout>
