@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!--android:gravity="center" để ảnh hiển thị đúng kích thước thật  -->
+    <item>
+        <bitmap android:src="@drawable/a1"
+            android:gravity="center"/>
+    </item>
+
+    <item
+        android:bottom="100dp"
+        android:right="100dp">
+        <bitmap android:src="@drawable/a5"
+            android:gravity="center"/>
+    </item>
+
+    <item
+        android:top="550dp">
+        <bitmap android:src="@drawable/a2"
+            android:gravity="center"/>
+    </item>
+</layer-list>

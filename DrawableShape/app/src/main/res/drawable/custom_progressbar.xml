@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- id="@+id/...." là id do người dùng tự định nghĩa-->
+    <!--id="@android:id/..." là id mặc định của andoid để nó có thể hiểu
+     được item này dùng vào thuộc tính nào của view   -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#CDB8B8"/>
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+    <!--cho thẻ clip bao shape để nó cắt bớt, chỉ hiện thị tương ứng với phần progress,
+    nếu không thì màu progress nó sẽ hiển thị full cái progressbar cho dù set giá
+    trị progress trong activity bao nhiêu đi nữa. cái background ko cần bao bởi
+    clip vì nó luôn hiển thị full cái progressbar.
+       -->
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#D85757"/>
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#FB0000"/>
+                <corners android:radius="20dp"/>
+            </shape>
+        </clip>
+    </item>
+</layer-list>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- state_pressed="true" : trạng thái đang nhấn chuột, bỏ ra là mất trạng thái này -->
+<!-- có khá là nhiều state   -->
+    <item android:drawable="@color/colorPrimary"
+        android:state_pressed="true" />
+
+<!--ko set trạng thái thì cái thuộc tính này là mặc định
+    lưu ý: là phải để dưới cùng-->
+    <item android:drawable="@color/colorAccent" />
+</selector>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorPrimary" />
+    <size android:height="160dp" android:width="200dp" />
+<!--    <corners android:bottomLeftRadius="50dp"-->
+<!--        android:topRightRadius="30dp" />-->
+    <corners android:radius="30dp" />
+    <padding android:bottom="40dp" />
+<!--dashWidth là độ rộng của các cái chấm nét đứt    -->
+<!--dashGap là khoảng các giữa các chấm    -->
+<!--width là chiều cao của đường viền    -->
+    <stroke android:color="#49E80F"
+        android:width="10dp"
+        android:dashGap="5dp"
+        android:dashWidth="15dp"
+        />
+<!--màu gradient này sẽ ghi đè màu trong thẻ solid  vì nó nằm dưới thẻ solid  -->
+    <gradient android:angle="45"
+        android:startColor="#1E64DD"
+        android:centerColor="#F4C417"
+        android:endColor="#FD0000" />
+</shape>

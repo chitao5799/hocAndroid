@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <padding android:bottom="10dp"
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"/>
+    <corners android:radius="10dp" />
+    <stroke android:width="2dp"
+        android:color="#123FE4" />
+<!--ko set màu cho cái shape này nên khi set nó làm background cho view
+thì view sẽ có background trong suốt-->
+<!--Cái trong suốt này chỉ có trên bản android trên 5.0. Còn dưới nó sẽ
+ ra màu đen . gán thuộc tính trong suốt transparent vào thẻ solid thì
+  được.    -->
+</shape>

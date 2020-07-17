@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--cắt theo phương chéo,1 phần hình xuất hiện ở góc trên cùng bên trái-->
+<!--Nếu android:gravity="center thì phần nhìn thấy của ảnh là ở giữa ảnh "-->
+<!--kích thước phần nhìn thấy còn tùy vào giá trị bên code file .java-->
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/a1"
+    android:clipOrientation="horizontal|vertical"
+    android:gravity="left|top">
+<!-- cắt theo phương ngang thì phần nhìn thấy của ảnh ở bên trái
+tức là phần còn lại bên phải bị ẩn đi
+ android:clipOrientation="horizontal"
+ android:gravity="left"-->
+</clip>
