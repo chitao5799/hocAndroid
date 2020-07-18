@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListViewVD extends AppCompatActivity {
     ListView lvMonhoc;
@@ -25,7 +22,7 @@ public class ListViewVD extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview_vd);
 
-        lvMonhoc=(ListView)findViewById(R.id.lvMonHoc);
+        lvMonhoc=(ListView)findViewById(R.id.lv_inActDialog);
         btnThem=(Button)findViewById(R.id.btnThem);
         edtMonHoc=(EditText)findViewById(R.id.edtMonhoc);
         btnCapNhat=(Button)findViewById(R.id.btnSua);

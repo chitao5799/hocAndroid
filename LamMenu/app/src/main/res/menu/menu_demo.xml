@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_menu">
+<!--app:showAsAction: mục đích show item menu ra, không nằm trong dấu 3 chấm khi bấm vào,vd
+                nhu icon search của youtobe nằm cạnh dấu 3 chấm dọc
+      = allway là luôn hiển thị
+      = collapseActionView là hiển thị khung search
+      =never là ko bao giờ hiện thị
+      =ifRoom nếu đủ không gian thì sẽ hiển thị
+      =withText là thay vị hiện icon thì hiển thị chữ
+      -->
+    <item android:title="setting"
+        android:icon="@android:drawable/ic_menu_manage"
+        app:showAsAction="always"
+        android:id="@+id/menu_setting"/>
+
+<!--orderInCategory thứ tự hiển thị ở khung menu dọc, số nhỏ đứng trước
+   nếu ko có thì hiển thị theo thứ thự khai báo, khai báo trước thì hiện trước-->
+    <item android:title="search"
+        android:orderInCategory="2"
+        android:id="@+id/menu_search"/>
+
+    <item android:title="share"
+
+        android:orderInCategory="1"
+        android:id="@+id/menu_share"/>
+
+    <item android:title="exit"
+        android:orderInCategory="4"
+        android:id="@+id/menuExit" />
+    <item android:title="contacts"
+        android:orderInCategory="3"
+        android:id="@+id/menuContacts">
+        <menu android:id="@+id/submenu_contacts">
+            <item android:title="Email"
+               android:id="@+id/menuEmail"/>
+            <item android:title="SDT"
+                android:icon="@android:drawable/arrow_up_float"
+                app:showAsAction="always"
+            android:id="@+id/menuSDT"/>
+            <item android:title="back"
+                android:icon="@drawable/abc_vector_test"
+                app:showAsAction="ifRoom"
+                android:id="@+id/menuback"/>
+        </menu>
+    </item>
+</menu>
