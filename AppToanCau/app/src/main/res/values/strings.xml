@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AppToanCau</string>
+    <string name="txt_TieuDe">Information</string>
+    <string name="hint_HoTen">Input Your Name</string>
+    <string name="hint_Email">Input Your Email</string>
+    <string name="hint_SDT">Input Your Phone Number</string>
+    <string name="txt_XacNhan">Confirm</string>
+    <string name="txtChao">hello guy</string>
+    <string name="txtEmail" translatable="false">Email</string>
+    <string name="txtSDT">Phone number</string>
+</resources>
