@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DatePickerDialogVD">
+        <activity android:name=".TimePickerDialogVD">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarVD">
+        <activity android:name=".TinhKhoangThoiGian">
 
         </activity>
-        <activity android:name=".CustomDialog"></activity>
+        <activity android:name=".DatePickerDialogVD"></activity>
+        <activity android:name=".CalendarVD" />
+        <activity android:name=".CustomDialog" />
         <activity android:name=".AlertDialogVD" />
         <activity android:name=".GridViewCoBan" />
         <activity android:name=".ListViewVD" />

@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DatePickerDialogVD">
+    tools:context=".TimePickerDialogVD">
 
-    <EditText
-        android:id="@+id/edtChonNgay"
+    <TextView
+        android:id="@+id/textViewChonGio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:hint="Chọn ngày"
-        android:inputType="textPersonName"
+        android:layout_marginTop="32dp"
+        android:text="Chọn giờ"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
