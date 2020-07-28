@@ -19,22 +19,22 @@ public class AdapterGridViewCustom extends BaseAdapter
     Context myContext;
     int myLayout;
   //  ArrayList<String> arr;
-    ArrayList<CustomTextView> arr;
-    public AdapterGridViewCustom(Context myContext, int myLayout, ArrayList<CustomTextView> arr)
+    ArrayList<clsTextView> arrTextView;
+    public AdapterGridViewCustom(Context myContext, int myLayout, ArrayList<clsTextView> arrTextView)
     {
         this.myContext = myContext;
         this.myLayout = myLayout;
-        this.arr = arr;
+        this.arrTextView = arrTextView;
     }
 
     @Override
     public int getCount() {
-        return arr.size();
+        return arrTextView.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return arr.get(i);
+        return arrTextView.get(i);
     }
 
     @Override
@@ -42,12 +42,28 @@ public class AdapterGridViewCustom extends BaseAdapter
         return i;
     }
 
-    boolean isX=true;
-    private  class ViewHolder{
-        CustomTextView customTextView;
-    }
+   boolean isX=true;
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view=inflater.inflate(myLayout,null);
+
+        final CustomTextView customTextView=view.findViewById(R.id.custom_textview);
+        customTextView.setBackgroundResource(R.drawable.oo);
+        customTextView.setTypeface(null, Typeface.BOLD);
+        customTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+
+        customTextView.setFocusable(false);
+        customTextView.setFocusableInTouchMode(false);
+
+        clsTextView tv=arrTextView.get(i);
+        customTextView.setText(tv.getTextInTextView());
+        customTextView.setTextColor(Color.parseColor(tv.getTextColorInTV()));
+
+        return view;
+    }
+    /*public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view=inflater.inflate(myLayout,null);
         final CustomTextView customTextView=view.findViewById(R.id.custom_textview);
@@ -72,7 +88,12 @@ public class AdapterGridViewCustom extends BaseAdapter
              }
          });
         return view;
+    }*/
+    /*
+    * private  class ViewHolder{
+        CustomTextView customTextView;
     }
+    * */
     /*@Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;

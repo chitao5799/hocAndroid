@@ -15,8 +15,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     GridView gridBanCo;
     AdapterGridViewCustom adapterGridView;
-    // ArrayList<String > list;
-    ArrayList<CustomTextView > list;
+    // ArrayList<String > listTextView;
+    //ArrayList<CustomTextView > listTextView;
+    ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer;
     boolean isXplayer;
     @Override
@@ -26,34 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         addData();
-      /*  gridBanCo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-           //     CustomTextView tv= (CustomTextView) gridBanCo.getItemAtPosition(position);//(CustomTextView) adapterView.getItemAtPosition(position);
-            //   tv.setText("okokoko");     //don't work
-              //  adapterGridView.notifyDataSetChanged();
-             //  ((TextView)view).setText("kkkkkkk");   //don't work
-             //   CustomTextView tv= (CustomTextView) view.findViewById((int)id);
-              //  tv.setText("okokoko");    //don't work
-                Toast.makeText(MainActivity.this,"ngoài x if",Toast.LENGTH_SHORT).show();
-                if(isXplayer)
-                {
-                    txtCurrentPlayer.setText("X");
-                    Toast.makeText(MainActivity.this,"vào x if",Toast.LENGTH_SHORT).show();
-                    isXplayer=false;
-                }
-                else
-                {
-                    txtCurrentPlayer.setText("O");
-                    isXplayer=true;
-                }
-            }
-        });*/
+        txtCurrentPlayer.setText("X");
         gridBanCo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,"ngoài x if",Toast.LENGTH_SHORT).show();
-                txtCurrentPlayer.setText("ppp");
+                if(isXplayer)
+                {
+                    listTextView.set(i,new clsTextView("X","#ff0000"));
+                    isXplayer=!isXplayer;
+                    txtCurrentPlayer.setText("O");
+                }
+                else
+                {
+                    listTextView.set(i,new clsTextView("O","#00cc00"));
+                    isXplayer=!isXplayer;
+                    txtCurrentPlayer.setText("X");
+                }
+               adapterGridView.notifyDataSetChanged();
+
             }
         });
     }
@@ -61,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private void addData()
     {
         for (int i=0;i<266;i++)
-            list.add(new CustomTextView(MainActivity.this));
+            listTextView.add(new clsTextView("","#ff0000"));
         adapterGridView.notifyDataSetChanged();
     }
 
@@ -69,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         txtCurrentPlayer=(TextView)findViewById(R.id.txtCurrentPlayer);
         isXplayer=true;
         gridBanCo=(GridView)findViewById(R.id.gridBanCo);
-        list=new ArrayList<>();
-        adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,list);
+        listTextView=new ArrayList<>();
+        adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,listTextView);
         gridBanCo.setAdapter(adapterGridView);
     }
 }
