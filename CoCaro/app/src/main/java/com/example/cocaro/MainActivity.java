@@ -3,7 +3,9 @@ package com.example.cocaro;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -11,16 +13,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridBanCo;
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
-    TextView txtCurrentPlayer;
+    TextView txtCurrentPlayer,txtCountDownTime;
     boolean isXplayer;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn;
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
+    Timer timer;
+    CountDownTimer waitTimer;
+    int secondsPerPlayer=1*60;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +36,18 @@ public class MainActivity extends AppCompatActivity {
         init();
         addData();
         txtCurrentPlayer.setText("X");
+        isXplayer=true;
+
         gridBanCo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l)//index bắt đầu từ 0
             {
+                if(waitTimer != null) {
+                    waitTimer.cancel();
+                    waitTimer = null;
+                }
+                CountDownTime();
+
                 if(isXplayer)
                 {
                     currentRow=index/numberOfColumn;
@@ -51,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if(isEndGame(66,currentRow,currentColumn))
                     {
-                        EndGame();
+                        EndGame(66);
                         return;
                     }
                 }
@@ -74,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if(isEndGame(88,currentRow,currentColumn))
                     {
-                        EndGame();
+                        EndGame(88);
                         return;
                     }
                 }
@@ -94,14 +109,31 @@ public class MainActivity extends AppCompatActivity {
         txtCurrentPlayer=(TextView)findViewById(R.id.txtCurrentPlayer);
         isXplayer=true;
         gridBanCo=(GridView)findViewById(R.id.gridBanCo);
+        txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime);
+
         listTextView=new ArrayList<>();
         adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,listTextView);
         gridBanCo.setAdapter(adapterGridView);
+        
+        int phut= secondsPerPlayer/60;
+        int giay=secondsPerPlayer%60;
+        String strMinute=phut<10?"0"+phut:phut+"";
+        String strSecond=giay<10?"0"+giay:giay+"";
+        txtCountDownTime.setText(strMinute+":"+strSecond);
     }
 
-    private  void EndGame()
+    private  void EndGame(int quanco)
     {
-        Toast.makeText(MainActivity.this,"đã kết thúc game",Toast.LENGTH_SHORT).show();
+        if(quanco==88)
+            Toast.makeText(MainActivity.this,"O thắng",Toast.LENGTH_SHORT).show();
+        else if(quanco==66)
+            Toast.makeText(MainActivity.this,"X thắng",Toast.LENGTH_SHORT).show();
+        else  Toast.makeText(MainActivity.this,"kết thúc game",Toast.LENGTH_SHORT).show();
+
+        if(waitTimer != null) {
+            waitTimer.cancel();
+            waitTimer = null;
+        }
     }
 
     private boolean isEndGame(int quanCo,int currentRow,int currentColumn)
@@ -205,4 +237,82 @@ public class MainActivity extends AppCompatActivity {
         }
         return countAbove+countBelow==5;
     }
+
+   /* private class MyTask extends TimerTask {
+        @Override
+        public void run() {
+           int phut=secondsPerPlayer/60;
+           int giay=secondsPerPlayer%60;
+           txtCountDownTime.setText(phut+":"+giay);
+           secondsPerPlayer-=1;
+           if(secondsPerPlayer==0)
+                timer.cancel();
+        }
+    }*/
+
+    private void CountDownTime()  {
+       // timer=new Timer("Timer");
+      //  timer.schedule(new MyTask(), 0, 1000);
+
+      /*  timer=new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            public void run() {
+                int phut=secondsPerPlayer/60;
+                int giay=secondsPerPlayer%60;
+                txtCountDownTime.setText(phut+":"+giay);
+                secondsPerPlayer-=1;
+                if(secondsPerPlayer==0)
+                    timer.cancel();
+            }
+        }, 0, 1000);*/
+
+
+        waitTimer = new CountDownTimer(secondsPerPlayer*1000+1000, 1000)// + thêm 1s để chạy hàm này set lại thời gian cho view là 00:00
+        {
+            int thoigian=secondsPerPlayer;
+            public void onTick(long millisUntilFinished) {
+                //called every 1000 milliseconds, which could be used to
+                //send messages or some other action
+                int phut= thoigian/60;
+                int giay=thoigian%60;
+                String strMinute=phut<10?"0"+phut:phut+"";
+                String strSecond=giay<10?"0"+giay:giay+"";
+
+                txtCountDownTime.setText(strMinute+":"+strSecond);
+                thoigian-=1;
+            }
+
+            public void onFinish() {
+                //After secondPerPlayer milliseconds (60 sec) finish current
+                //if you would like to execute something when time finishes
+                if(isXplayer)
+                    EndGame(88);//nếu hết thời gian mà đang là lượt X đánh thì O thắng.
+                else
+                    EndGame(66);
+            }
+        }.start();
+    }
+    /*class ViewTitleThread extends Thread {
+
+        public ViewTitleThread() {
+            start();
+        }
+
+        public void run() {
+            while (true) {
+                try {
+                    int phut=secondsPerPlayer/60;
+                    int giay=secondsPerPlayer%60;
+                    txtCountDownTime.setText(phut+":"+giay);
+                    secondsPerPlayer-=1;
+                    if(secondsPerPlayer==0)
+                        break;
+                    sleep(1000);
+                } catch (InterruptedException ex) {
+                }
+            }
+        }
+    }*/
+
 }
