@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
         gvAnhs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,arrImage.get(i).getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"đây là: "+arrImage.get(i).getName(),Toast.LENGTH_SHORT).show();
+                arrImage.set(i,new HinhAnh("ảnh 1",R.drawable.a1));
+                anhAdapter.notifyDataSetChanged();
             }
         });
     }

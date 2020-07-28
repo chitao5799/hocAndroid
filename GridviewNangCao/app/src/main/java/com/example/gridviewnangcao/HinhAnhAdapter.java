@@ -47,6 +47,8 @@ public class HinhAnhAdapter extends BaseAdapter {
             LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(layout,null);
             viewHolder.hinhAnh=(ImageView)view.findViewById(R.id.imgHinhAnh);
+            viewHolder.hinhAnh.setFocusable(false);//để chạy hàm setOnItemClickListener của gridview thì các sự kiện của view trong gridvew phải tắt bỏ.
+            viewHolder.hinhAnh.setFocusableInTouchMode(false);
             view.setTag(viewHolder);
         }else
         {
