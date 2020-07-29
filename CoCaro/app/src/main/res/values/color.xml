@@ -3,4 +3,5 @@
     <color name="theme_main">#181818</color>
     <color name="theme_accent">#13afdd</color>
     <color name="theme_bg">#282828</color>
+    <color name="dialog_back">#686868</color>
 </resources>

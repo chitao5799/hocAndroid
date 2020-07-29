@@ -1,14 +1,22 @@
 package com.example.cocaro;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime;
-    boolean isXplayer;
-    int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn;
+    ImageView imgNewGame;
+    boolean isXplayer,isClickNewGame=false;
+    int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
-    Timer timer;
     CountDownTimer waitTimer;
-    int secondsPerPlayer=1*60;
+    int secondsPerPlayer=1*60, thoigian=secondsPerPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +57,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 CountDownTime();
 
+                currentRow=index/numberOfColumn;
+                currentColumn=index%numberOfColumn;
+                if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88)
+                {
+                    Toast.makeText(MainActivity.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if(isXplayer)
                 {
-                    currentRow=index/numberOfColumn;
-                    currentColumn=index%numberOfColumn;
-                    if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88)
-                    {
-                        Toast.makeText(MainActivity.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
                     chessBoard[currentRow][currentColumn]=66;//66 đại diện cho x
 
                     listTextView.set(index,new clsTextView("X","#ff0000"));
@@ -72,15 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    currentRow=index/numberOfColumn;
-                    currentColumn=index%numberOfColumn;
-                    if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88)
-                    {
-                        Toast.makeText(MainActivity.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
                     chessBoard[currentRow][currentColumn]=88;//88 đại diện cho O
-
 
                     listTextView.set(index,new clsTextView("O","#00cc00"));
                     adapterGridView.notifyDataSetChanged();
@@ -93,11 +95,55 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
-
+                oDaDanh++;
+                if(oDaDanh>=totalOVuong)
+                {
+                    EndGame(44);//44 đại diện cho game hòa
+                    return;
+                }
+            }
+        });
+        imgNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isClickNewGame=true;
+                NewGame();
             }
         });
     }
 
+    private void NewGame()
+    {
+        if(waitTimer != null) {
+            waitTimer.cancel();
+            waitTimer = null;
+        }
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("Thông báo");
+        alertDialog.setIcon(R.drawable.icongame);
+        alertDialog.setMessage("Bạn có chắc chắn muốn chơi ván mới không?");
+        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               // Intent intent=new Intent(MainActivity.this,MainActivity.class);
+               // startActivity(intent);
+                onBackPressed();
+            }
+        });
+        alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                CountDownTime();
+            }
+        });
+        alertDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // perform action here
+    }
     private void addData()
     {
         for (int i=0;i<totalOVuong;i++)
@@ -110,11 +156,16 @@ public class MainActivity extends AppCompatActivity {
         isXplayer=true;
         gridBanCo=(GridView)findViewById(R.id.gridBanCo);
         txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime);
+        imgNewGame=(ImageView)findViewById(R.id.imgNewGame);
+
+        Intent intent=getIntent();
+        secondsPerPlayer=intent.getIntExtra("timePerPlay",1)*60;
+        thoigian=secondsPerPlayer;
 
         listTextView=new ArrayList<>();
         adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,listTextView);
         gridBanCo.setAdapter(adapterGridView);
-        
+
         int phut= secondsPerPlayer/60;
         int giay=secondsPerPlayer%60;
         String strMinute=phut<10?"0"+phut:phut+"";
@@ -124,18 +175,61 @@ public class MainActivity extends AppCompatActivity {
 
     private  void EndGame(int quanco)
     {
-        if(quanco==88)
-            Toast.makeText(MainActivity.this,"O thắng",Toast.LENGTH_SHORT).show();
-        else if(quanco==66)
-            Toast.makeText(MainActivity.this,"X thắng",Toast.LENGTH_SHORT).show();
-        else  Toast.makeText(MainActivity.this,"kết thúc game",Toast.LENGTH_SHORT).show();
+        DialogEndGame(quanco);
 
         if(waitTimer != null) {
             waitTimer.cancel();
             waitTimer = null;
         }
     }
+    private void DialogEndGame(int quanCoWin)
+    {
+        final Dialog dialog=new Dialog(MainActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//bỏ title của dialog, dòng này phải nằm trên dòng setContentView
+        dialog.setContentView(R.layout.layout_end_game);
+        //dialog.setTitle("form đăng nhập");//title của dialog thì 1 số máy có 1 số máy ko có
+        dialog.setCanceledOnTouchOutside(false);//true - mặc định: thì khi click ra ngoài dialog sẽ tự đóng dialog
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        //dialog bằng 18/20 chiều rộng màn hình, 6/7 chiều cao màn hình
+        dialog.getWindow().setLayout((18 * width)/20, (6* height)/7);
 
+        TextView winer;
+        ImageView btnNewGame,btnHome;
+        winer=(TextView) dialog.findViewById(R.id.txtThang);
+        btnNewGame=(ImageView)dialog.findViewById(R.id.imgNewGameInLaoutEndGame);
+        btnHome=(ImageView)dialog.findViewById(R.id.imgHomeInLayoutEndGame);
+
+        if(quanCoWin==88)
+        {
+            winer.setText("O thắng");
+        }
+        else if(quanCoWin==66)
+        {
+            winer.setText("X thắng");
+        }
+        else if(quanCoWin==44)
+        {
+            winer.setText("Hòa");
+        }
+
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent=new Intent(MainActivity.this,TrangChu.class);
+               startActivity(intent);
+            }
+        });
+
+        dialog.show();
+    }
     private boolean isEndGame(int quanCo,int currentRow,int currentColumn)
     {
         return isEndHorizontal(quanCo,currentRow,currentColumn) || isEndVertical(quanCo,currentRow,currentColumn) ||
@@ -238,39 +332,21 @@ public class MainActivity extends AppCompatActivity {
         return countAbove+countBelow==5;
     }
 
-   /* private class MyTask extends TimerTask {
-        @Override
-        public void run() {
-           int phut=secondsPerPlayer/60;
-           int giay=secondsPerPlayer%60;
-           txtCountDownTime.setText(phut+":"+giay);
-           secondsPerPlayer-=1;
-           if(secondsPerPlayer==0)
-                timer.cancel();
-        }
-    }*/
-
     private void CountDownTime()  {
-       // timer=new Timer("Timer");
-      //  timer.schedule(new MyTask(), 0, 1000);
-
-      /*  timer=new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-
-            public void run() {
-                int phut=secondsPerPlayer/60;
-                int giay=secondsPerPlayer%60;
-                txtCountDownTime.setText(phut+":"+giay);
-                secondsPerPlayer-=1;
-                if(secondsPerPlayer==0)
-                    timer.cancel();
-            }
-        }, 0, 1000);*/
-
-
-        waitTimer = new CountDownTimer(secondsPerPlayer*1000+1000, 1000)// + thêm 1s để chạy hàm này set lại thời gian cho view là 00:00
+        if(isClickNewGame)
         {
-            int thoigian=secondsPerPlayer;
+            thoigian=thoigian;
+            isClickNewGame=false;
+        }
+
+        else
+        {
+            thoigian=secondsPerPlayer;
+        }
+
+        waitTimer = new CountDownTimer(thoigian*1000+1000, 1000)// + thêm 1s để chạy hàm này set lại thời gian cho view là 00:00
+        {
+
             public void onTick(long millisUntilFinished) {
                 //called every 1000 milliseconds, which could be used to
                 //send messages or some other action
@@ -293,26 +369,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
-    /*class ViewTitleThread extends Thread {
-
-        public ViewTitleThread() {
-            start();
-        }
-
-        public void run() {
-            while (true) {
-                try {
-                    int phut=secondsPerPlayer/60;
-                    int giay=secondsPerPlayer%60;
-                    txtCountDownTime.setText(phut+":"+giay);
-                    secondsPerPlayer-=1;
-                    if(secondsPerPlayer==0)
-                        break;
-                    sleep(1000);
-                } catch (InterruptedException ex) {
-                }
-            }
-        }
-    }*/
 
 }
