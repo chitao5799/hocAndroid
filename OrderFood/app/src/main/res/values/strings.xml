@@ -14,5 +14,5 @@
     <string name="foodName">Tên món:</string>
     <string name="hintFoodName">nhập tên food</string>
     <string name="moTaFood">Mô tả:</string>
-    <string name="supervisor_profile_choose_image_title">Hãy chọn 1 ảnh</string>
+    <string name="supervisor_profile_choose_image_title">chọn 1 ảnh</string>
 </resources>

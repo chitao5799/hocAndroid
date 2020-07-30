@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class FoodModal  {
+public class FoodModel {
     DBhelper dBhelper;
     SQLiteDatabase db;
-    public FoodModal(Context context)
+    public FoodModel(Context context)
     {
         dBhelper=new DBhelper(context);
     }
@@ -20,12 +20,12 @@ public class FoodModal  {
         db=dBhelper.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         //put du lieu vao doi tượng
-        contentValues.put("id",food.id);
+        contentValues.put("id",Integer.parseInt(food.id) );
         contentValues.put("name",food.name);
         contentValues.put("des",food.mota);
-        contentValues.put("price",food.gia);
-        contentValues.put("amount",food.soluong);
-        contentValues.put("picutrue",food.picture);
+        contentValues.put("price",Float.parseFloat(food.gia));
+        contentValues.put("amount",Integer.parseInt(food.soluong));
+        contentValues.put("picutrue", food.picture);
         //thực hiện insert vào csdl
         return db.insert("btl_food",null,contentValues);
     }

@@ -19,11 +19,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class TinhDiem2Nguoi extends AppCompatActivity {
     GridView gridBanCo;
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
-    TextView txtCurrentPlayer,txtCountDownTime;
+    TextView txtCurrentPlayer,txtCountDownTime,txtScoreX,txtScoreO;
     ImageView imgNewGame;
     boolean isXplayer,isClickNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;
@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
     int currentRow=-1,currentColumn=-1;
     CountDownTimer waitTimer;
     int secondsPerPlayer=1*60, thoigian=secondsPerPlayer;
-
+    int scoreX=0,scoreO=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tinh_diem2_nguoi);
 
         init();
         addData();
@@ -54,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
                 currentRow=index/numberOfColumn;
                 currentColumn=index%numberOfColumn;
-                if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88)
+                if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88 ||
+                        chessBoard[currentRow][currentColumn]==-1)
                 {
-                    Toast.makeText(MainActivity.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TinhDiem2Nguoi.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -71,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
                     if(isEndGame(66,currentRow,currentColumn))
                     {
-                        EndGame(66);
+                        scoreX++;
+                        txtScoreX.setText(scoreX+"");
+                        Toast.makeText(TinhDiem2Nguoi.this,"X ghi điểm",Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
@@ -86,14 +89,22 @@ public class MainActivity extends AppCompatActivity {
 
                     if(isEndGame(88,currentRow,currentColumn))
                     {
-                        EndGame(88);
+                        scoreO++;
+                        txtScoreO.setText(""+scoreO);
+                        Toast.makeText(TinhDiem2Nguoi.this,"O ghi điểm",Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
                 oDaDanh++;
                 if(oDaDanh>=totalOVuong)
                 {
-                    EndGame(44);//44 đại diện cho game hòa
+                    if(scoreX>scoreO)
+                        EndGame(66);
+                    else
+                        if(scoreX<scoreO)
+                            EndGame(88);
+                        else
+                             EndGame(44);//44 đại diện cho game hòa
                     return;
                 }
             }
@@ -114,15 +125,15 @@ public class MainActivity extends AppCompatActivity {
             waitTimer = null;
         }
 
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(TinhDiem2Nguoi.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setIcon(R.drawable.icongame);
         alertDialog.setMessage("Bạn có chắc chắn muốn chơi ván mới không?");
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-               // Intent intent=new Intent(MainActivity.this,MainActivity.class);
-               // startActivity(intent);
+                // Intent intent=new Intent(TinhDiem2Nguoi.this,TinhDiem2Nguoi.class);
+                // startActivity(intent);
                 onBackPressed();
             }
         });
@@ -147,11 +158,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        txtCurrentPlayer=(TextView)findViewById(R.id.txtCurrentPlayer);
+        txtCurrentPlayer=(TextView)findViewById(R.id.txtCurrentPlayer2);
         isXplayer=true;
-        gridBanCo=(GridView)findViewById(R.id.gridBanCo);
-        txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime);
-        imgNewGame=(ImageView)findViewById(R.id.imgNewGame);
+        gridBanCo=(GridView)findViewById(R.id.gridBanCo2);
+        txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime2);
+        imgNewGame=(ImageView)findViewById(R.id.imgNewGame2);
+        txtScoreX=(TextView)findViewById(R.id.txtScoreX);
+        txtScoreO=(TextView)findViewById(R.id.txtScoreO); 
+
+        txtScoreX.setText("0");
+        txtScoreO.setText("0");
 
         Intent intent=getIntent();
         secondsPerPlayer=intent.getIntExtra("timePerPlay",1)*60;
@@ -179,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void DialogEndGame(int quanCoWin)
     {
-        final Dialog dialog=new Dialog(MainActivity.this);
+        final Dialog dialog=new Dialog(TinhDiem2Nguoi.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);//bỏ title của dialog, dòng này phải nằm trên dòng setContentView
         dialog.setContentView(R.layout.layout_end_game);
         //dialog.setTitle("form đăng nhập");//title của dialog thì 1 số máy có 1 số máy ko có
@@ -218,8 +234,8 @@ public class MainActivity extends AppCompatActivity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent=new Intent(MainActivity.this,TrangChu.class);
-               startActivity(intent);
+                Intent intent=new Intent(TinhDiem2Nguoi.this,TrangChu.class);
+                startActivity(intent);
             }
         });
 
@@ -235,11 +251,15 @@ public class MainActivity extends AppCompatActivity {
     {
         int countLeft=0,countRight=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
+        int nhungOThang[]=new int[numberOfColumn];
+        int index=0;
         for(int i=currentColumn ; i>=0 ; i--)//đếm bên trái của ô hiện tại
         {
             if(chessBoard[currentRow][i]==quanCo)
             {
                 countLeft++;
+                nhungOThang[index]=currentRow*numberOfColumn+i;
+                index++;
             }
             else
             {
@@ -254,6 +274,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[currentRow][i]==quanCo)
             {
                 countRight++;
+                nhungOThang[index]=currentRow*numberOfColumn+i;
+                index++;
             }
             else
             {
@@ -263,22 +285,51 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+        //xét thắng thua.
         if(isBlockedAbove || isBlockedBelove)
-            return countLeft+countRight>=5;
+        {
+            if(countLeft+countRight>=5)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
         else if (!isBlockedAbove && !isBlockedBelove)
-            return countLeft+countRight>=4;
-        else  return countLeft+countRight>=5;
+        {
+            if(countLeft+countRight>=4)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
+        else  return false;
     }
 
     private boolean isEndVertical(int quanCo,int currentRow,int currentColumn)
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
+        int nhungOThang[]=new int[numberOfColumn];
+        int index=0;
         for(int i=currentRow ; i>=0 ; i--)//đếm phía trên của ô hiện tại
         {
             if(chessBoard[i][currentColumn]==quanCo)
             {
                 countAbove++;
+                nhungOThang[index]=i*numberOfColumn+currentColumn;
+                index++;
             }
             else {
                 if((chessBoard[i][currentColumn]==66 && quanCo==88) ||
@@ -292,6 +343,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[i][currentColumn]==quanCo)
             {
                 countBelow++;
+                nhungOThang[index]=i*numberOfColumn+currentColumn;
+                index++;
             }
             else {
                 if((chessBoard[i][currentColumn]==66 && quanCo==88) ||
@@ -300,17 +353,44 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+        //xét thắng thua.
         if(isBlockedAbove || isBlockedBelove)
-            return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=5)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
         else if (!isBlockedAbove && !isBlockedBelove)
-            return countAbove+countBelow>=4;
-        else  return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=4)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
+        else  return false;
     }
 
     private boolean isEndPrimary(int quanCo,int currentRow,int currentColumn)
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
+        int nhungOThang[]=new int[numberOfColumn];
+        int index=0;
         for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo chính phía trên của ô hiện tại
         {
             if(currentRow-i<0 || currentColumn-i<0)
@@ -318,6 +398,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[currentRow-i][currentColumn-i]==quanCo)
             {
                 countAbove++;
+                nhungOThang[index]=(currentRow-i)*numberOfColumn+(currentColumn-i);
+                index++;
             }
             else {
                 if((chessBoard[currentRow-i][currentColumn-i]==66 && quanCo==88) ||
@@ -333,6 +415,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[currentRow+i][currentColumn+i]==quanCo)
             {
                 countBelow++;
+                nhungOThang[index]=(currentRow+i)*numberOfColumn+(currentColumn+i);
+                index++;
             }
             else {
                 if((chessBoard[currentRow+i][currentColumn+i]==66 && quanCo==88) ||
@@ -341,17 +425,44 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+        //xét thắng thua.
         if(isBlockedAbove || isBlockedBelove)
-            return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=5)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
         else if (!isBlockedAbove && !isBlockedBelove)
-            return countAbove+countBelow>=4;
-        else  return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=4)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
+        else  return false;
     }
 
     private boolean isEndSubsidiary(int quanCo,int currentRow,int currentColumn)
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
+        int nhungOThang[]=new int[numberOfColumn];
+        int index=0;
         for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo phụ phía trên của ô hiện tại
         {
             if(currentRow-i<0 || currentColumn+i>=numberOfColumn)
@@ -359,6 +470,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[currentRow-i][currentColumn+i]==quanCo)
             {
                 countAbove++;
+                nhungOThang[index]=(currentRow-i)*numberOfColumn+(currentColumn+i);
+                index++;
             }
             else {
                 if((chessBoard[currentRow-i][currentColumn+i]==66 && quanCo==88) ||
@@ -374,6 +487,8 @@ public class MainActivity extends AppCompatActivity {
             if(chessBoard[currentRow+i][currentColumn-i]==quanCo)
             {
                 countBelow++;
+                nhungOThang[index]=(currentRow+i)*numberOfColumn+(currentColumn-i);
+                index++;
             }
             else {
                 if((chessBoard[currentRow+i][currentColumn-i]==66 && quanCo==88) ||
@@ -382,11 +497,36 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+        //xét thắng thua.
         if(isBlockedAbove || isBlockedBelove)
-            return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=5)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
         else if (!isBlockedAbove && !isBlockedBelove)
-            return countAbove+countBelow>=4;
-        else  return countAbove+countBelow>=5;
+        {
+            if(countAbove+countBelow>=4)
+            {
+                for(int y=0;y<index;y++)
+                {
+                    chessBoard[nhungOThang[y] / numberOfColumn][nhungOThang[y] % numberOfColumn] = -1;//-1 thể hiện những ô ko được xét thắng thua
+                    listTextView.set(nhungOThang[y],new clsTextView("i","#000000"));
+                    adapterGridView.notifyDataSetChanged();
+                }
+                return true;
+            }
+            else return false;
+        }
+        else  return false;
     }
 
     private void CountDownTime()  {

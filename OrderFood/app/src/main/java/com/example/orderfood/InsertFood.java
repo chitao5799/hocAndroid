@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,15 +14,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class ThemMon extends AppCompatActivity implements View.OnClickListener {
+public class InsertFood extends AppCompatActivity implements View.OnClickListener {
     EditText edtId,edtName,edtPrice,edtDes,edtAmount;
     ImageView imgFood;
     Button btnSave,btnClose,btnSelectImage,btnChupAnh;
     private static final int PICK_IMAGE = 222;
     private static final int CAMERA_REQUEST = 111;
+    FoodModel foodModal;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,6 +64,26 @@ public class ThemMon extends AppCompatActivity implements View.OnClickListener {
                 getString(R.string.supervisor_profile_choose_image_title));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
         startActivityForResult(chooserIntent, PICK_IMAGE);
+    }
+    private Food getFoodInfo()
+    {
+        Food food=new Food();
+        food.id=edtId.getText().toString();
+        food.name=edtName.getText().toString();
+        food.picture=ConvertBitmapToArray(imgFood);
+        food.soluong=edtAmount.getText().toString();
+        food.gia=edtPrice.getText().toString();
+        food.mota=edtDes.getText().toString();
+        return food;
+    }
+    public  byte[] ConvertBitmapToArray(ImageView imageView)
+    {
+        BitmapDrawable bitmapDrawable= (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap=bitmapDrawable.getBitmap();
+        //thực hiện convert sang mảng byte[]
+        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+        return stream.toByteArray();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) //hàm lấy kết quả từ hàm GetImageFromDevice() or ChupAnh()
@@ -105,6 +131,10 @@ public class ThemMon extends AppCompatActivity implements View.OnClickListener {
                 ChupAnh();
                 break;
             case R.id.btnLuuInAddFood:
+                foodModal=new FoodModel(getApplicationContext());
+                long kq=foodModal.insertFood(getFoodInfo());
+                if(kq > -1) Toast.makeText(InsertFood.this,"insert "+kq+" ban ghi thành công",Toast.LENGTH_LONG).show();
+                else Toast.makeText(InsertFood.this,"insert thất bại",Toast.LENGTH_LONG).show();
                 break;
             case R.id.btnThoatInAddFood:
                 finish();

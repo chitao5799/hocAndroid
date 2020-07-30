@@ -16,10 +16,9 @@
 
         <ImageView
             android:id="@+id/imgItemListview"
-            android:layout_width="164dp"
-            android:layout_height="wrap_content"
+            android:layout_width="115dp"
+            android:layout_height="match_parent"
             app:srcCompat="@android:drawable/btn_dialog" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -61,11 +60,11 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnOrder"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/imgOrder"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order"
-            android:textSize="18sp" />
+            app:srcCompat="@android:drawable/checkbox_on_background" />
     </LinearLayout>
+
 </RelativeLayout>
