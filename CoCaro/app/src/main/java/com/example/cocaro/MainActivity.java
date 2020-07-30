@@ -18,20 +18,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
     GridView gridBanCo;
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime;
-    ImageView imgNewGame;
+    ImageView imgNewGame,imgDanhLai;
     boolean isXplayer,isClickNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
     CountDownTimer waitTimer;
     int secondsPerPlayer=1*60, thoigian=secondsPerPlayer;
-
+    Stack stack_O_Da_Danh=new Stack();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 if(isXplayer)
                 {
                     chessBoard[currentRow][currentColumn]=66;//66 đại diện cho x
-
                     listTextView.set(index,new clsTextView("X","#ff0000"));
                     adapterGridView.notifyDataSetChanged();
+                    stack_O_Da_Danh.push(new Integer(index));
                     isXplayer=!isXplayer;
                     txtCurrentPlayer.setText("O");
 
@@ -78,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     chessBoard[currentRow][currentColumn]=88;//88 đại diện cho O
-
                     listTextView.set(index,new clsTextView("O","#00cc00"));
                     adapterGridView.notifyDataSetChanged();
+                    stack_O_Da_Danh.push(new Integer(index));
                     isXplayer=!isXplayer;
                     txtCurrentPlayer.setText("X");
 
@@ -103,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isClickNewGame=true;
                 NewGame();
+            }
+        });
+        imgDanhLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DanhLai();
             }
         });
     }
@@ -152,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         gridBanCo=(GridView)findViewById(R.id.gridBanCo);
         txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime);
         imgNewGame=(ImageView)findViewById(R.id.imgNewGame);
+        imgDanhLai=(ImageView)findViewById(R.id.imgDanhLai);
 
         Intent intent=getIntent();
         secondsPerPlayer=intent.getIntExtra("timePerPlay",1)*60;
@@ -175,6 +183,27 @@ public class MainActivity extends AppCompatActivity {
         if(waitTimer != null) {
             waitTimer.cancel();
             waitTimer = null;
+        }
+    }
+    private void DanhLai()
+    {
+        if(stack_O_Da_Danh.isEmpty())
+        {
+            Toast.makeText(MainActivity.this,"bàn cờ chưa đánh quân cờ nào!",Toast.LENGTH_LONG).show();
+            return;
+        }
+        Integer index= (Integer) stack_O_Da_Danh.pop();
+        listTextView.set(index,new clsTextView("","#000000"));
+        adapterGridView.notifyDataSetChanged();
+        chessBoard[index/numberOfColumn][index%numberOfColumn]=0;//giá trị mặc định của int là 0
+        if(isXplayer)//đến lượt X đánh thì lượt vừa mói đánh là O
+        {
+            txtCurrentPlayer.setText("O");
+            isXplayer=!isXplayer;
+        }
+        else{
+            txtCurrentPlayer.setText("X");
+            isXplayer=!isXplayer;
         }
     }
     private void DialogEndGame(int quanCoWin)

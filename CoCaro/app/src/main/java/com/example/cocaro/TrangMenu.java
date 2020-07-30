@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ public class TrangMenu extends AppCompatActivity {
     Button btnStartGame;
     EditText edtTimePlay;
     int minutePerPlay;
+    CheckBox cbTinhDiem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,16 +22,25 @@ public class TrangMenu extends AppCompatActivity {
 
         btnStartGame=(Button)findViewById(R.id.btnStartGame);
         edtTimePlay=(EditText)findViewById(R.id.edtTimePerPlay);
+        cbTinhDiem=(CheckBox)findViewById(R.id.cbTinhDiem);
 
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!CheckInput())
                     return;
+                if(cbTinhDiem.isChecked())
+                {
+                    Intent intent=new Intent(TrangMenu.this,TinhDiem2Nguoi.class);
+                    intent.putExtra("timePerPlay",minutePerPlay);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent=new Intent(TrangMenu.this,MainActivity.class);
+                    intent.putExtra("timePerPlay",minutePerPlay);
+                    startActivity(intent);
+                }
 
-                Intent intent=new Intent(TrangMenu.this,MainActivity.class);
-                intent.putExtra("timePerPlay",minutePerPlay);
-                startActivity(intent);
             }
         });
     }

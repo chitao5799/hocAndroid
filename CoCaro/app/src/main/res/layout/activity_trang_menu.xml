@@ -31,8 +31,9 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <RadioGroup
-        android:layout_width="185dp"
-        android:layout_height="81dp"
+        android:id="@+id/radioGroup"
+        android:layout_width="189dp"
+        android:layout_height="72dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -42,7 +43,7 @@
             android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:buttonTint="#5af600"
+            android:buttonTint="#5af600"
             android:text="1 người chơi"
             android:textColor="#87e777"
             android:textSize="24sp" />
@@ -52,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#005ef6"
+            android:checked="true"
             android:text="2 người chơi"
             android:textColor="#6197df"
             android:textSize="24sp" />
@@ -62,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="104dp"
         android:text="Nhạc:"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +74,12 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="108dp"
         android:buttonTint="#e16c6c"
+        android:text="Có"
+        android:textColor="#23BF8E"
+        android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -83,7 +88,7 @@
         android:layout_width="132dp"
         android:layout_height="82dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="Thời gian mỗi lượt:"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +99,7 @@
         android:layout_width="67dp"
         android:layout_height="39dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/input_minute"
         android:ems="10"
         android:inputType="number"
@@ -106,8 +111,8 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="44dp"
         android:text="phút"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/edtTimePerPlay"
@@ -127,5 +132,28 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:text="Tính điểm:"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <CheckBox
+        android:id="@+id/cbTinhDiem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:text="Có"
+        android:textColor="#A010BA"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

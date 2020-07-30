@@ -24,7 +24,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime,txtScoreX,txtScoreO;
-    ImageView imgNewGame;
+    ImageView imgNewGame,imgDanhLai;
     boolean isXplayer,isClickNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
@@ -116,6 +116,13 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
                 NewGame();
             }
         });
+        imgDanhLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TinhDiem2Nguoi.this,"Chức năng đánh lại hiện không khả dụng khi chơi tính điểm",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void NewGame()
@@ -165,6 +172,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         imgNewGame=(ImageView)findViewById(R.id.imgNewGame2);
         txtScoreX=(TextView)findViewById(R.id.txtScoreX);
         txtScoreO=(TextView)findViewById(R.id.txtScoreO); 
+        imgDanhLai=(ImageView)findViewById(R.id.imgDanhLai2);
 
         txtScoreX.setText("0");
         txtScoreO.setText("0");
