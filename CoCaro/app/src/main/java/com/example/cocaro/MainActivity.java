@@ -240,6 +240,12 @@ public class MainActivity extends AppCompatActivity {
             txtCurrentPlayer.setText("X");
             isXplayer=!isXplayer;
         }
+
+        if(waitTimer != null) {
+            waitTimer.cancel();
+            waitTimer = null;
+        }
+        CountDownTime();
     }
     private void DialogEndGame(int quanCoWin)
     {
