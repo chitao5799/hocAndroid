@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
@@ -25,16 +26,18 @@ public class MainActivity extends AppCompatActivity {
     AdapterGridViewCustom adapterGridView;
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime;
-    ImageView imgNewGame,imgDanhLai;
-    boolean isXplayer,isClickNewGame=false;
-    int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;
+    ImageView imgNewGame,imgDanhLai,imgMusic;
+    boolean isXplayer,isClickNewGame=false,isPlayMusic=false;
+    int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;//266
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
     CountDownTimer waitTimer;
     int secondsPerPlayer=1*60, thoigian=secondsPerPlayer;
     Stack stack_O_Da_Danh=new Stack();
+    MediaPlayer mediaPlayer=null;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,19 +50,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l)//index bắt đầu từ 0
             {
-                if(waitTimer != null) {
-                    waitTimer.cancel();
-                    waitTimer = null;
-                }
-                CountDownTime();
-
                 currentRow=index/numberOfColumn;
                 currentColumn=index%numberOfColumn;
+
                 if(chessBoard[currentRow][currentColumn]==66 || chessBoard[currentRow][currentColumn]==88)
                 {
                     Toast.makeText(MainActivity.this,"ô này đã được đánh, vui lòng đánh ô khác!",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if(waitTimer != null) {
+                    waitTimer.cancel();
+                    waitTimer = null;
+                }
+                CountDownTime();
 
                 if(isXplayer)
                 {
@@ -112,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
                 DanhLai();
             }
         });
+        imgMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlayMusic();
+            }
+        });
     }
 
     private void NewGame()
@@ -130,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                // Intent intent=new Intent(MainActivity.this,MainActivity.class);
                // startActivity(intent);
+
+                mediaPlayer.pause();
+                mediaPlayer=null;
                 onBackPressed();
             }
         });
@@ -160,10 +173,12 @@ public class MainActivity extends AppCompatActivity {
         txtCountDownTime=(TextView)findViewById(R.id.txtCountDownTime);
         imgNewGame=(ImageView)findViewById(R.id.imgNewGame);
         imgDanhLai=(ImageView)findViewById(R.id.imgDanhLai);
+        imgMusic=(ImageView)findViewById(R.id.imgMusic);
 
         Intent intent=getIntent();
         secondsPerPlayer=intent.getIntExtra("timePerPlay",1)*60;
         thoigian=secondsPerPlayer;
+        isPlayMusic=intent.getBooleanExtra("isPlayMusic",false);
 
         listTextView=new ArrayList<>();
         adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,listTextView);
@@ -174,8 +189,28 @@ public class MainActivity extends AppCompatActivity {
         String strMinute=phut<10?"0"+phut:phut+"";
         String strSecond=giay<10?"0"+giay:giay+"";
         txtCountDownTime.setText(strMinute+":"+strSecond);
-    }
 
+        mediaPlayer=MediaPlayer.create(MainActivity.this,R.raw.despacito);
+        mediaPlayer.setLooping(true);
+        if(isPlayMusic)
+        {
+            mediaPlayer.start();
+        }
+        else {
+            imgMusic.setImageResource(R.drawable.mute);
+        }
+    }
+    private void PlayMusic()
+    {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            imgMusic.setImageResource(R.drawable.mute);
+        }
+        else {
+            mediaPlayer.start();
+            imgMusic.setImageResource(R.drawable.loaloa);
+        }
+    }
     private  void EndGame(int quanco)
     {
         DialogEndGame(quanco);
@@ -241,12 +276,17 @@ public class MainActivity extends AppCompatActivity {
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.pause();
+                mediaPlayer=null;
                 onBackPressed();
+
             }
         });
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.pause();
+                mediaPlayer=null;
                Intent intent=new Intent(MainActivity.this,TrangChu.class);
                startActivity(intent);
             }
@@ -381,7 +421,7 @@ public class MainActivity extends AppCompatActivity {
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
-        for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo phụ phía trên của ô hiện tại
+        for(int i=0 ; i<=currentRow ; i++)//đếm đường chéo phụ phía trên của ô hiện tại
         {
             if(currentRow-i<0 || currentColumn+i>=numberOfColumn)
                 break;
@@ -396,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
-        for(int i=1 ; i<numberOfColumn - currentColumn ; i++)//đếm đường chéo phụ phía dưới của ô hiện tại
+        for(int i=1 ; i<=currentColumn ; i++)//đếm đường chéo phụ phía dưới của ô hiện tại
         {
             if(currentRow+i>=numberOfRow || currentColumn-i<0)
                 break;

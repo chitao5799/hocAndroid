@@ -107,7 +107,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imgMusic2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="26dp"
@@ -160,7 +160,7 @@
         android:textColor="#F60404"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/imgMusic"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imgNewGame2"
         app:layout_constraintTop_toBottomOf="@+id/gridBanCo2" />
@@ -194,7 +194,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imgDanhLai"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imgMusic2"
         app:layout_constraintTop_toBottomOf="@+id/gridBanCo2" />
 
     <TextView

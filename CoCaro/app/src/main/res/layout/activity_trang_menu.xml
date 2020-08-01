@@ -40,13 +40,15 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioBtn1player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#5af600"
+            android:clickable="false"
             android:text="1 người chơi"
             android:textColor="#87e777"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:visibility="visible" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -71,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbMusic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="92dp"
@@ -105,7 +107,7 @@
         android:inputType="number"
         android:text="1"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cbMusic" />
 
     <TextView
         android:id="@+id/textView11"
@@ -116,7 +118,7 @@
         android:text="phút"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/edtTimePerPlay"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cbMusic" />
 
     <Button
         android:id="@+id/btnStartGame"

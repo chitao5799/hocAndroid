@@ -43,9 +43,36 @@ public class AdapterGridViewCustom extends BaseAdapter
     }
 
    boolean isX=true;
-
+    private  class ViewHolder{
+        CustomTextView customTextView;
+    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        ViewHolder viewHolder;
+        if(view==null)
+        {
+            viewHolder=new ViewHolder();
+            LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view=inflater.inflate(myLayout,null);
+            viewHolder.customTextView=(CustomTextView) view.findViewById(R.id.custom_textview);
+            viewHolder.customTextView.setBackgroundResource(R.drawable.oo);
+            viewHolder.customTextView.setTypeface(null, Typeface.BOLD);
+            viewHolder.customTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            viewHolder.customTextView.setFocusable(false);
+            viewHolder.customTextView.setFocusableInTouchMode(false);
+            view.setTag(viewHolder);
+        }
+        else{
+            viewHolder=(ViewHolder) view.getTag();
+        }
+
+        clsTextView tv=arrTextView.get(i);
+        viewHolder.customTextView.setText(tv.getTextInTextView());
+        viewHolder.customTextView.setTextColor(Color.parseColor(tv.getTextColorInTV()));
+
+        return view;
+    }
+  /*  public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view=inflater.inflate(myLayout,null);
 
@@ -62,7 +89,10 @@ public class AdapterGridViewCustom extends BaseAdapter
         customTextView.setTextColor(Color.parseColor(tv.getTextColorInTV()));
 
         return view;
-    }
+    }*/
+
+
+  //-------------------------
     /*public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view=inflater.inflate(myLayout,null);
