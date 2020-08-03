@@ -38,6 +38,7 @@ public class TrangMenu extends AppCompatActivity {
                     intent.putExtra("timePerPlay",minutePerPlay);
                     intent.putExtra("isPlayMusic",cbMusic.isChecked());
                     startActivity(intent);
+                    //finish();//destroy activity này khi chuyển đến activity mới
                 }
                 else{
                     Intent intent=new Intent(TrangMenu.this,MainActivity.class);

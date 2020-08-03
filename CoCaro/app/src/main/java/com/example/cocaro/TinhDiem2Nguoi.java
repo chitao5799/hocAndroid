@@ -26,7 +26,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime,txtScoreX,txtScoreO;
     ImageView imgNewGame,imgDanhLai,imgMusic;
-    boolean isXplayer,isClickNewGame=false,isPlayMusic=false;
+    boolean isXplayer,isClickNewGame=false,isPlayMusic=false,isWantNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;//266
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
@@ -112,7 +112,6 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         imgNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isClickNewGame=true;
                 NewGame();
             }
         });
@@ -143,6 +142,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
     }
     private void NewGame()
     {
+        isClickNewGame=true;
         if(waitTimer != null) {
             waitTimer.cancel();
             waitTimer = null;
@@ -151,7 +151,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         AlertDialog.Builder alertDialog=new AlertDialog.Builder(TinhDiem2Nguoi.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setIcon(R.drawable.icongame);
-        alertDialog.setMessage("Bạn có chắc chắn muốn chơi ván mới không?");
+        alertDialog.setMessage("Bạn có chắc chắn muốn dừng trận đấu này ?");
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,6 +159,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
                 // startActivity(intent);
                 mediaPlayer.pause();
                 mediaPlayer=null;
+                isWantNewGame=true;
                 onBackPressed();
             }
         });
@@ -172,8 +173,14 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        // perform action here
+        if(isWantNewGame)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+           NewGame();
+        }
     }
     private void addData()
     {
@@ -268,6 +275,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.pause();
                 mediaPlayer=null;
+                isWantNewGame=true;
                 onBackPressed();
             }
         });

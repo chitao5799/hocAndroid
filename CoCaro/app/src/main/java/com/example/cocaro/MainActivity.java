@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime;
     ImageView imgNewGame,imgDanhLai,imgMusic;
-    boolean isXplayer,isClickNewGame=false,isPlayMusic=false;
+    boolean isXplayer,isClickNewGame=false,isPlayMusic=false,isWantNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;//266
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
     int currentRow=-1,currentColumn=-1;
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         imgNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isClickNewGame=true;
                 NewGame();
             }
         });
@@ -126,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void NewGame()
     {
+        isClickNewGame=true;
         if(waitTimer != null) {
             waitTimer.cancel();
             waitTimer = null;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialog=new AlertDialog.Builder(MainActivity.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setIcon(R.drawable.icongame);
-        alertDialog.setMessage("Bạn có chắc chắn muốn chơi ván mới không?");
+        alertDialog.setMessage("Bạn có chắc chắn muốn thoát khỏi trận đấu này?");
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mediaPlayer.pause();
                 mediaPlayer=null;
+                isWantNewGame=true;
                 onBackPressed();
             }
         });
@@ -156,8 +157,14 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        // perform action here
+        if(isWantNewGame)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            NewGame();
+        }
     }
     private void addData()
     {
@@ -284,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.pause();
                 mediaPlayer=null;
+                isWantNewGame=true;
                 onBackPressed();
 
             }
