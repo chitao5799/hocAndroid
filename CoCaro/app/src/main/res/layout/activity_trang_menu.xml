@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="88dp"
         android:text="Nhạc:"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +76,8 @@
         android:id="@+id/cbMusic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="96dp"
         android:buttonTint="#e16c6c"
         android:text="Có"
         android:textColor="#23BF8E"
@@ -124,14 +124,14 @@
         android:id="@+id/btnStartGame"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/start_button"
         android:text="Bắt đầu"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -157,5 +157,17 @@
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/btnLichSu"
+        android:layout_width="159dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:background="#43B3B3"
+        android:text="Xem lịch sử chơi"
+        android:textColor="#EBECEB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartGame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

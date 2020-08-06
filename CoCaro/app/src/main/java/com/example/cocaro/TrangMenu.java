@@ -20,6 +20,7 @@ public class TrangMenu extends AppCompatActivity {
     int minutePerPlay;
     CheckBox cbTinhDiem,cbMusic;
     RadioButton radioBtn1Player;
+    Button btnLichSu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,13 @@ public class TrangMenu extends AppCompatActivity {
 
             }
         });
+        btnLichSu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(TrangMenu.this,LichSu.class);
+                startActivity(intent);
+            }
+        });
     }
     private void GetViews()
     {
@@ -57,6 +65,7 @@ public class TrangMenu extends AppCompatActivity {
         cbTinhDiem=(CheckBox)findViewById(R.id.cbTinhDiem);
         cbMusic=(CheckBox)findViewById(R.id.cbMusic);
         radioBtn1Player=(RadioButton)findViewById(R.id.radioBtn1player);
+        btnLichSu=(Button)findViewById(R.id.btnLichSu);
 
         String text="1 người chơi";
         SpannableString ss=new SpannableString(text);

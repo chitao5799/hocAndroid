@@ -72,6 +72,28 @@ public class AdapterGridViewCustom extends BaseAdapter
 
         return view;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /*  public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater= (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view=inflater.inflate(myLayout,null);

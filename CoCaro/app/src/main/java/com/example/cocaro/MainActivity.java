@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,12 +16,16 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<clsTextView > listTextView;
     TextView txtCurrentPlayer,txtCountDownTime;
     ImageView imgNewGame,imgDanhLai,imgMusic;
+
     boolean isXplayer,isClickNewGame=false,isPlayMusic=false,isWantNewGame=false;
     int totalOVuong=266,numberOfColumn=14,numberOfRow=totalOVuong/numberOfColumn,oDaDanh=0;//266
     int chessBoard[][]=new int[numberOfRow][numberOfColumn];
@@ -35,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     int secondsPerPlayer=1*60, thoigian=secondsPerPlayer;
     Stack stack_O_Da_Danh=new Stack();
     MediaPlayer mediaPlayer=null;
+
+    SQLiteDatabase db;
+    Calendar calendar=Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -220,6 +231,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private  void EndGame(int quanco)
     {
+        if(quanco==88)
+        {
+            ghiFile(88);
+        }
+        else if(quanco==66)
+        {
+            ghiFile(66);
+        }
+        else
+        {
+            ghiFile(44);
+        }
         DialogEndGame(quanco);
 
         if(waitTimer != null) {
@@ -254,6 +277,34 @@ public class MainActivity extends AppCompatActivity {
         }
         CountDownTime();
     }
+    private String getNowDateTime()
+    {
+        int nam=calendar.get(Calendar.YEAR);
+        int thang=calendar.get(Calendar.MONTH);
+        int ngay=calendar.get(Calendar.DATE);
+        int gio=calendar.get(Calendar.HOUR_OF_DAY);//trả về giời định dạng 24 giờ
+        int phut=calendar.get(Calendar.MINUTE);
+        int giay=calendar.get(Calendar.SECOND);
+
+        calendar.set(nam,thang,ngay,gio,phut,giay); //set lại ngày tháng năm hiện tại của calender để dùng hàm getTime() phía dưới
+        SimpleDateFormat dinhDangNgay=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dinhDangNgay.format(calendar.getTime());
+
+    }
+    private void ghiFile(int winner)
+    {
+        String strWinner="";
+        if(winner==66)
+            strWinner="X thắng";
+        else if(winner==88)
+            strWinner="O thắng";
+        else strWinner="Hòa";
+
+        db=openOrCreateDatabase("carohistory.db",MODE_PRIVATE,null);
+        String sql="Insert into tblcaro(time,winner) values ('"+getNowDateTime()+"','"+strWinner+"');";
+        db.execSQL(sql);
+        db.close();
+    }
     private void DialogEndGame(int quanCoWin)
     {
         final Dialog dialog=new Dialog(MainActivity.this);
@@ -280,10 +331,12 @@ public class MainActivity extends AppCompatActivity {
         else if(quanCoWin==66)
         {
             winer.setText("X thắng");
+
         }
         else if(quanCoWin==44)
         {
             winer.setText("Hòa");
+
         }
 
         btnNewGame.setOnClickListener(new View.OnClickListener() {
