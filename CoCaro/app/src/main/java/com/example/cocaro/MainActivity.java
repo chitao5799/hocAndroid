@@ -364,14 +364,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean isEndGame(int quanCo,int currentRow,int currentColumn)
     {
         return isEndHorizontal(quanCo,currentRow,currentColumn) || isEndVertical(quanCo,currentRow,currentColumn) ||
-                isEndPrimary(quanCo,currentRow,currentColumn) || isEndSubsidiary(quanCo,currentRow,currentColumn);
+            isEndPrimary(quanCo,currentRow,currentColumn) || isEndSubsidiary(quanCo,currentRow,currentColumn);
     }
 
     private boolean isEndHorizontal(int quanCo,int currentRow,int currentColumn)
     {
         int countLeft=0,countRight=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
-        for(int i=currentColumn ; i>=0 ; i--)//đếm bên trái của ô hiện tại
+        for(int i=currentColumn ; i>=0 ; i--)//đếm bên trái của ô hiện tại và cả ô hiện tại
         {
             if(chessBoard[currentRow][i]==quanCo)
             {
@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
-        for(int i=currentRow ; i>=0 ; i--)//đếm phía trên của ô hiện tại
+        for(int i=currentRow ; i>=0 ; i--)//đếm phía trên của ô hiện tại và cả ô hiện tại
         {
             if(chessBoard[i][currentColumn]==quanCo)
             {
@@ -447,7 +447,7 @@ public class MainActivity extends AppCompatActivity {
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
-        for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo chính phía trên của ô hiện tại
+        for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo chính phía trên của ô hiện tại và cả ô hiện tại
         {
             if(currentRow-i<0 || currentColumn-i<0)
                 break;
@@ -488,7 +488,7 @@ public class MainActivity extends AppCompatActivity {
     {
         int countAbove=0,countBelow=0;
         boolean isBlockedAbove=false,isBlockedBelove=false;
-        for(int i=0 ; i<=currentRow ; i++)//đếm đường chéo phụ phía trên của ô hiện tại
+        for(int i=0 ; i<=currentRow ; i++)//đếm đường chéo phụ phía trên của ô hiện tại và cả ô hiện tại
         {
             if(currentRow-i<0 || currentColumn+i>=numberOfColumn)
                 break;

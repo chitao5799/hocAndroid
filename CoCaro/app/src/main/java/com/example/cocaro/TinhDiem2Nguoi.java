@@ -350,7 +350,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         boolean isBlockedAbove=false,isBlockedBelove=false;
         int nhungOThang[]=new int[numberOfColumn];
         int index=0;
-        for(int i=currentColumn ; i>=0 ; i--)//đếm bên trái của ô hiện tại
+        for(int i=currentColumn ; i>=0 ; i--)//đếm bên trái của ô hiện tại và cả ô hiện tại
         {
             if(chessBoard[currentRow][i]==quanCo)
             {
@@ -420,7 +420,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         boolean isBlockedAbove=false,isBlockedBelove=false;
         int nhungOThang[]=new int[numberOfColumn];
         int index=0;
-        for(int i=currentRow ; i>=0 ; i--)//đếm phía trên của ô hiện tại
+        for(int i=currentRow ; i>=0 ; i--)//đếm phía trên của ô hiện tại và cả ô hiện tại
         {
             if(chessBoard[i][currentColumn]==quanCo)
             {
@@ -488,7 +488,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         boolean isBlockedAbove=false,isBlockedBelove=false;
         int nhungOThang[]=new int[numberOfColumn];
         int index=0;
-        for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo chính phía trên của ô hiện tại
+        for(int i=0 ; i<=currentColumn ; i++)//đếm đường chéo chính phía trên của ô hiện tại và cả ô hiện tại
         {
             if(currentRow-i<0 || currentColumn-i<0)
                 break;
@@ -560,7 +560,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
         boolean isBlockedAbove=false,isBlockedBelove=false;
         int nhungOThang[]=new int[numberOfColumn];
         int index=0;
-        for(int i=0 ; i<=currentRow ; i++)//đếm đường chéo phụ phía trên của ô hiện tại
+        for(int i=0 ; i<=currentRow ; i++)//đếm đường chéo phụ phía trên của ô hiện tại và cả ô hiện tại
         {
             if(currentRow-i<0 || currentColumn+i>=numberOfColumn)
                 break;

@@ -44,14 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#5af600"
-            android:clickable="false"
             android:text="1 người chơi"
             android:textColor="#87e777"
             android:textSize="24sp"
             android:visibility="visible" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioBtn2Player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#005ef6"
@@ -152,8 +151,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
+        android:buttonTint="#80717171"
         android:text="Có"
-        android:textColor="#A010BA"
+        android:textColor="#5C858585"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
