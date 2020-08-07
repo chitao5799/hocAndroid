@@ -18,16 +18,11 @@ public class TrangChu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chu);
 
-        /*//chạy câu lệnh tạo bảng này 1 lần rồi comment lại
         db=openOrCreateDatabase("carohistory.db",MODE_PRIVATE,null);
-        String sql1="DROP TABLE IF EXISTS tblcaro;";
-        String sql= "CREATE TABLE tblcaro(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,time text, winner text)";
-        db.execSQL(sql1);
+        String sql= "CREATE TABLE IF NOT EXISTS tblcaro(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,time text, winner text)";
         db.execSQL(sql);
-//        String sql3="INSERT INTO tblcaro(time,winner) VALUES ( 'MANOJ KUMAR', 'Meerut,UP,INDIA' )";
-//        db.execSQL(sql3);
         db.close();
-*/
+
 
         btnPlay=(Button)findViewById(R.id.btnPlayGame);
         btnExit=(Button)findViewById(R.id.btnExitGame);
