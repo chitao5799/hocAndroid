@@ -46,14 +46,11 @@ public class FoodAdapter extends ArrayAdapter<Food>
         return listFood.indexOf(item);
     }
 
-    @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
-    }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView,
+                        @NonNull ViewGroup parent) {
         View view=convertView;
         if(view==null){
             LayoutInflater layoutInflater=LayoutInflater.from(context);
@@ -61,7 +58,7 @@ public class FoodAdapter extends ArrayAdapter<Food>
 
         }
         //lấy ra thông tin của food tại vị trí position
-        Food food=listFood.get(position);
+        Food food=getItem(position);
         //thực hiện gán dữ liệu lên item food
         if(food!=null){
             TextView tvName=(TextView)view.findViewById(R.id.txtNameItemListview);

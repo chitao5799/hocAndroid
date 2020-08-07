@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgFoodItem"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNameItem"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tvName" />
+
+        <TextView
+            android:id="@+id/tvPriceItem"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvAmountItem"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tvAmount" />
+
+        <ImageButton
+            android:id="@+id/btnAdd"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="68dp"
+            android:layout_height="67dp"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_input_add"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+
+</LinearLayout>

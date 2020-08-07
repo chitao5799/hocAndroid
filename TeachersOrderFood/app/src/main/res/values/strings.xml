@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">My Order Food</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="id">Food ID</string>
+    <string name="etID">Nhap food ID</string>
+    <string name="tvName">Food Name</string>
+    <string name="etName">Input Food Name</string>
+    <string name="tvDes">Food Descreption</string>
+    <string name="etDes">Input Food Descreption</string>
+    <string name="btnSelectImg">Select Image</string>
+    <string name="tvPrice">Price</string>
+    <string name="etPrice">Input Price</string>
+    <string name="tvAmount">Amount</string>
+    <string name="etAmount">Input Amount</string>
+    <string name="btnSave">Save</string>
+    <string name="btnClose">Closed</string>
+    <string name="food_imge">food_img</string>
+</resources>

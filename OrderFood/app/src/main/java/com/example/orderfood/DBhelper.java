@@ -29,7 +29,7 @@ public class DBhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql="create table tbl_food (id integer primary key, "+
-                "name text,des text, price float,mount integer,picture bold);";//định nghĩa câu lệnh tạo bảng
+                "name text,des text, price float,amount integer,picture blod);";//định nghĩa câu lệnh tạo bảng
 
         //thực hiện câu lệnh
         sqLiteDatabase.execSQL(sql);

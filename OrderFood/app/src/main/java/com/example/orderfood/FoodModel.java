@@ -20,12 +20,12 @@ public class FoodModel {
         db=dBhelper.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         //put du lieu vao doi tượng
-        contentValues.put("id",Integer.parseInt(food.id) );
+        contentValues.put("id",food.id );
         contentValues.put("name",food.name);
         contentValues.put("des",food.mota);
-        contentValues.put("price",Float.parseFloat(food.gia));
-        contentValues.put("amount",Integer.parseInt(food.soluong));
-        contentValues.put("picutrue", food.picture);
+        contentValues.put("price",food.gia);
+        contentValues.put("amount",food.soluong);
+        contentValues.put("picture", food.picture);
         //thực hiện insert vào csdl
         return db.insert("btl_food",null,contentValues);
     }
