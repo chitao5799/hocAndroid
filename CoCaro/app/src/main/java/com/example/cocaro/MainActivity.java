@@ -356,6 +356,8 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer=null;
                Intent intent=new Intent(MainActivity.this,TrangChu.class);
                startActivity(intent);
+               finish();
+
             }
         });
 

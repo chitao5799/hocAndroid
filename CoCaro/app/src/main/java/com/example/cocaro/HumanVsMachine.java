@@ -266,18 +266,19 @@ public class HumanVsMachine extends AppCompatActivity {
             Toast.makeText(HumanVsMachine.this,"bàn cờ chưa đánh quân cờ nào!",Toast.LENGTH_LONG).show();
             return;
         }
-        Integer index= (Integer) stack_O_Da_Danh.pop();
-        listTextView.set(index,new clsTextView("","#000000"));
-        adapterGridView.notifyDataSetChanged();
-        chessBoard[index/numberOfColumn][index%numberOfColumn]=0;//giá trị mặc định của int là 0
-        if(isMachineplay)//đến lượt máy đánh thì lượt vừa mói đánh là bạn
+        if(!isMachineplay)
         {
+            Integer index= (Integer) stack_O_Da_Danh.pop();
+            listTextView.set(index,new clsTextView("","#000000"));
+            chessBoard[index/numberOfColumn][index%numberOfColumn]=0;//giá trị mặc định của int là 0
+            index= (Integer) stack_O_Da_Danh.pop();
+            listTextView.set(index,new clsTextView("","#000000"));
+            chessBoard[index/numberOfColumn][index%numberOfColumn]=0;//giá trị mặc định của int là 0
+            adapterGridView.notifyDataSetChanged();
             txtCurrentPlayer.setText("Bạn");
-            isMachineplay=!isMachineplay;
         }
         else{
-            txtCurrentPlayer.setText("Máy");
-            isMachineplay=!isMachineplay;
+            Toast.makeText(HumanVsMachine.this,"Đang là lượt máy đánh, bạn không thể đi lại",Toast.LENGTH_SHORT).show();
         }
 
         if(waitTimer != null) {
@@ -365,6 +366,7 @@ public class HumanVsMachine extends AppCompatActivity {
                 mediaPlayer=null;
                 Intent intent=new Intent(HumanVsMachine.this,TrangChu.class);
                 startActivity(intent);
+                finish();
             }
         });
 

@@ -333,6 +333,7 @@ public class TinhDiem2Nguoi extends AppCompatActivity {
                 mediaPlayer=null;
                 Intent intent=new Intent(TinhDiem2Nguoi.this,TrangChu.class);
                 startActivity(intent);
+                finish();
             }
         });
 
