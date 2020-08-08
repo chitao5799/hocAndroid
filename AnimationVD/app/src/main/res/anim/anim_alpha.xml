@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+<!-- android:fillAfter="true" chỉ định giữ nguyên trạng thái sau khi chạy song hiệu ứng-->
+    <alpha android:fromAlpha="1.0"
+        android:toAlpha="0.1"
+        android:repeatCount="2"
+        android:repeatMode="reverse"
+        android:duration="3000" />
+<!-- android:repeatCount điền số nguyên chỉ định sô lần lặp
+    android:repeatCount="infinite" để lặp vô hạn-->
+</set>

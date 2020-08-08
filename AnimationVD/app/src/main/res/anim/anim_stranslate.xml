@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:fromXDelta="0"
+        android:toXDelta="300"
+        android:duration="2000" />
+<!-- nếu chỉ có hướng X thì di chuyển theo chiều ngang
+    chỉ có Y thì di chuyển theo chiều dọc
+    có cả 2 thì di chuyển theo đường chéo -->
+    <translate
+        android:startOffset="2000"
+        android:fromYDelta="0"
+        android:toYDelta="350"
+        android:duration="2000"/>
+<!-- android:startOffset="2000" là đợi 2s mới thực hiện animation translate này   -->
+    <translate
+        android:startOffset="4000"
+        android:fromXDelta="0"
+        android:toXDelta="-300"
+        android:duration="2000" />
+    <translate
+        android:startOffset="6000"
+        android:fromXDelta="0"
+        android:toXDelta="300"
+        android:fromYDelta="0"
+        android:toYDelta="-350"
+        android:duration="2000"/>
+</set>

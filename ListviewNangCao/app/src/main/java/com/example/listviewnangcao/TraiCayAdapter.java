@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -92,6 +94,9 @@ public class TraiCayAdapter extends BaseAdapter {
         viewHolder.txtMota.setText(traiCay.getMoTa());
         viewHolder.imgHinh.setImageResource(traiCay.getHinh());
 
+        //áp dụng animation cho listview
+        Animation animScaleList= AnimationUtils.loadAnimation(context,R.anim.list_scale);
+        view.startAnimation(animScaleList);
         return view;
     }
 }
