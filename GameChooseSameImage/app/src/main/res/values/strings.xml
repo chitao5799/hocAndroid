@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Chọn ảnh giống nhau</string>
+    <string-array name="list_name">
+        <item>img1</item>
+        <item>img2</item>
+        <item>img3</item>
+        <item>img4</item>
+        <item>img5</item>
+        <item>img6</item>
+        <item>img7</item>
+        <item>img8</item>
+        <item>img9</item>
+        <item>img10</item>
+        <item>img11</item>
+        <item>img12</item>
+        <item>img13</item>
+        <item>img14</item>
+        <item>img15</item>
+        <item>img16</item>
+        <item>img17</item>
+        <item>img18</item>
+    </string-array>
+</resources>
