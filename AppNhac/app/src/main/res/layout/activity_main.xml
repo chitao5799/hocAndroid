@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTenBaiHat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="tên bài hát"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="24sp" />
+
+    <ImageButton
+        android:id="@+id/imgBtnPrevious"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/previous" />
+
+    <ImageButton
+        android:id="@+id/imgBtnPlay"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/imgBtnPrevious"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/play" />
+
+    <ImageButton
+        android:id="@+id/imgBtnStop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/imgBtnPlay"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/stop" />
+
+    <ImageButton
+        android:id="@+id/imgBtnNext"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/imgBtnStop"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/next" />
+
+    <SeekBar
+        android:id="@+id/seekBarProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imgBtnPlay"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="31dp"
+        android:progressTint="#FF5722" />
+
+    <TextView
+        android:id="@+id/tvTimeProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekBarProgress"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:text="00:00"
+        android:textColor="#E14D4D"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTimeTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekBarProgress"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
+        android:text="00:00"
+        android:textColor="#F44336"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imgDisk"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/tvTenBaiHat"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="68dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/disk" />
+
+
+</RelativeLayout>
