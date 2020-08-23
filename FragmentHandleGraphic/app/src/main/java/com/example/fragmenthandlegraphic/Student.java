@@ -1,6 +1,8 @@
 package com.example.fragmenthandlegraphic;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private String hoTen;
     private int namSinh;
     private String diaChi;
