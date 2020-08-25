@@ -11,16 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlayVideoActivity"></activity>
-        <activity android:name=".PlaylistYoutubeActivity"
-            android:configChanges="orientation|screenSize">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_api_key" />
+
+        <activity android:name=".MapAPIActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".PlayVideoActivity" />
+        <activity
+            android:name=".PlaylistYoutubeActivity"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
