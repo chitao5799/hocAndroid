@@ -1,3 +1,5 @@
+screenshort app ví dụ bài học: https://drive.google.com/file/d/1HcRSkCMFsMvUB_x41Wa63Nh3kZDc3XZh/view?usp=sharing
+
 ### Game cờ ca rô
 source code game cờ caro android, folder: CoCaro\\
 #### screenshot:
