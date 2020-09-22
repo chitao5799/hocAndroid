@@ -31,7 +31,7 @@
         <activity android:name=".Noti_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity android:name=".CallPhone">
@@ -53,7 +53,7 @@
         <activity android:name=".OpenWeb">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
         </activity>
