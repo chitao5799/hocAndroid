@@ -28,8 +28,13 @@ public class SendSMSN extends AppCompatActivity {
         btnsendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Thuc hien gui tin nhan SMS
+        Uri uri = Uri.parse("smsto:5556");
+        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+        it.putExtra("sms_body", "Here you can set the SMS text to be sent");
+        startActivity(it);
 
-                checkPermission();
+
+//                checkPermission();
 
             }
         });
