@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         thoigian=secondsPerPlayer;
         isPlayMusic=intent.getBooleanExtra("isPlayMusic",false);
 
+
         listTextView=new ArrayList<>();
         adapterGridView=new AdapterGridViewCustom(this,R.layout.o_caro,listTextView);
         gridBanCo.setAdapter(adapterGridView);

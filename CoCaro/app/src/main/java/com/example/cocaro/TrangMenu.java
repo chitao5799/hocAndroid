@@ -47,6 +47,7 @@ public class TrangMenu extends AppCompatActivity {
                     Intent intent=new Intent(TrangMenu.this,MainActivity.class);
                     intent.putExtra("timePerPlay",minutePerPlay);
                     intent.putExtra("isPlayMusic",cbMusic.isChecked());
+
                     startActivity(intent);
                 }
                 else {

@@ -35,8 +35,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-//cho phép nhập các từ khóa, cách nhau bởi dấu phẩy. nhận tin nhắn đến xem tin nào có từ khóa 
-//thì hiển thị nên listview và hiện thông báo có tin nhắn bị chặn
+//cho phép nhập các từ khóa, cách nhau bởi dấu phẩy. nhận tin nhắn đến và xem tin nào có chứa từ khóa 
+//thì hiển thị tin nhắn đó nên listview và hiện thông báo có tin nhắn bị chặn
     EditText edtDSTuKhoa;
     ListView lvTinNhan;
     TextView tvTitle;
