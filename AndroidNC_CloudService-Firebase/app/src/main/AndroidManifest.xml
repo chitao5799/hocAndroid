@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.googleapi">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.example.bai9">
 
     <application
         android:allowBackup="true"
@@ -11,25 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map_api_key" />
-
-        <activity android:name=".MapAPIActivity">
-
-        </activity>
-        <activity android:name=".PlayVideoActivity" />
-        <activity
-            android:name=".PlaylistYoutubeActivity"
-            android:configChanges="orientation|screenSize">
+        <activity android:name=".CloudStorage_Act">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".Authen_Act_Google">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" >
-
+        <activity android:name=".Authen_Act">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
     </application>
 
